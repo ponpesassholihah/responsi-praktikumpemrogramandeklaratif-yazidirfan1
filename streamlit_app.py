@@ -27,7 +27,13 @@ def main():
 
     # Handle form submission
     if st.button('Diagnosa'):
-        selected_symptoms = st.session_state.selected_symptoms
+        # Get selected symptoms from form
+        selected_symptoms = []
+        for symptom in ['perasaan_sedih', 'kehilangan_minat', 'gangguan_tidur', 'perubahan_berat_badan',
+                        'pikiran_bunuh_diri', 'perubahan_suasana_hati', 'perubahan_pola_makan', 'ketidakmampuan_konsentrasi']:
+            if st.session_state.get(symptom, False):
+                selected_symptoms.append(symptom)
+
         if selected_symptoms:
             # Run diagnosis.pl with selected symptoms
             result = run_diagnosis(selected_symptoms)
