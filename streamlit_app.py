@@ -1,5 +1,6 @@
 import streamlit as st
 import subprocess
+import json
 
 # Function to display HTML content
 def display_html(file_path):
@@ -27,18 +28,23 @@ def main():
 
     # Handle form submission
     if st.button('Diagnosa'):
-        # Get selected symptoms from form
-        selected_symptoms = []
-        for symptom in ['perasaan_sedih', 'kehilangan_minat', 'gangguan_tidur', 'perubahan_berat_badan',
-                        'pikiran_bunuh_diri', 'perubahan_suasana_hati', 'perubahan_pola_makan', 'ketidakmampuan_konsentrasi']:
-            if st.session_state.get(symptom, False):
-                selected_symptoms.append(symptom)
-
+        selected_symptoms = st.session_state.selected_symptoms
         if selected_symptoms:
             # Run diagnosis.pl with selected symptoms
             result = run_diagnosis(selected_symptoms)
             if result:
-                st.write(f"Hasil Diagnosa:\n{result}")
+                try:
+                    # Parse JSON result from diagnosis.pl
+                    result_dict = json.loads(result)
+                    diagnosis = result_dict.get('diagnosis', '')
+                    recommendations = result_dict.get('recommendations', '')
+                    
+                    # Display diagnosis and recommendations
+                    st.header('Hasil Diagnosa:')
+                    st.write(f"Diagnosis: {diagnosis}")
+                    st.write(f"Rekomendasi: {recommendations}")
+                except json.JSONDecodeError as e:
+                    st.error(f"Error decoding JSON result: {e}")
             else:
                 st.error("Gagal melakukan diagnosa.")
         else:
