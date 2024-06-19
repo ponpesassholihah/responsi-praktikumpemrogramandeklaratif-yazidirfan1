@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diagnosa Kesehatan Mental Remaja</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    ::placeholder {
+      color: #aaa;
+      opacity: 1; /* Firefox */
+    }
+    :-ms-input-placeholder { /* Internet Explorer 10-11 */
+      color: #aaa;
+    }
+    ::-ms-input-placeholder { /* Microsoft Edge */
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="text-center mt-5 mb-4">Diagnosa Kesehatan Mental Remaja</h1>
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <form id="diagnosisForm">
+          <div class="form-group">
+            <label for="namaPasien">Nama Pasien:</label>
+            <input type="text" class="form-control" id="namaPasien" name="namaPasien" placeholder="Masukkan Nama Lengkap">
+          </div>
+          <div class="form-group">
+            <label>Pilih Gejala:</label>
+            <div class="form-group" id="gejala">
+              <label>
+                <input type="checkbox" name="gejala" value="perasaan_sedih" 
+                       data-kesimpulan="Sepertinya Anda mengalami distimia, yang bisa membuat Anda merasa sedih secara kronis yang berkepanjangan." 
+                       data-saran="Lakukan aktivitas yang menyenangkan, berbicara dengan teman atau keluarga, atau berkonsultasi dengan profesional jika diperlukan.">
+                Perasaan sedih.
+            </label><br>
+            <label>
+              <input type="checkbox" name="gejala" value="kehilangan_minat" 
+                     data-kesimpulan="Anda mungkin mengalami sindrom burnout, yang bisa membuat Anda merasa kelelahan fisik, emosional, dan mental karena stres yang berkepanjangan." 
+                     data-saran="Coba kegiatan baru, berolahraga, atau mencari hobi baru untuk menemukan kembali minat dan kegembiraan.">
+              Kehilangan minat atau kegembiraan.
+            </label><br>
+            <label>
+              <input type="checkbox" name="gejala" value="gangguan_tidur" 
+                     data-kesimpulan="Anda mungkin mengalami sleep apnea, yang bisa menyebabkan Anda mengalami henti napas selama tidur dan mengganggu pola tidur alami." 
+                     data-saran="Buat rutinitas tidur yang teratur, hindari kafein sebelum tidur, dan coba teknik relaksasi sebelum tidur.">
+              Gangguan tidur.
+            </label><br>
+            <label>
+              <input type="checkbox" name="gejala" value="perubahan_berat_badan" 
+                     data-kesimpulan="Sepertinya Anda mengalami masalah dengan kelenjar tiroid Anda, mungkin hipertiroidisme atau hipotiroidisme, yang bisa memengaruhi metabolisme tubuh dan menyebabkan perubahan berat badan yang drastis." 
+                     data-saran="Konsultasi dengan ahli gizi, atur pola makan sehat, dan perhatikan asupan kalori harian.">
+              Perubahan berat badan drastis.
+            </label><br>
+            <label>
+              <input type="checkbox" name="gejala" value="pikiran_bunuh_diri" 
+                     data-kesimpulan="Anda mungkin mengalami PTSD (Post-Traumatic Stress Disorder), yang muncul setelah pengalaman traumatis dan dapat membuat Anda memiliki pikiran tentang bunuh diri." 
+                     data-saran="Segera cari bantuan profesional, bicarakan dengan orang yang dipercaya, dan hindari isolasi diri.">
+              Pikiran tentang bunuh diri.
+            </label><br>
+            <label>
+              <input type="checkbox" name="gejala" value="perubahan_suasana_hati" 
+                     data-kesimpulan="Sepertinya Anda mengalami gangguan siklotimik, yang bisa membuat suasana hati Anda berubah-ubah secara ekstrem dan tidak terkendali." 
+                     data-saran="Catat suasana hati harian, hindari stres, dan coba teknik manajemen stres seperti meditasi atau yoga.">
+              Perubahan signifikan suasana hati.
+            </label><br>
+            <label>
+              <input type="checkbox" name="gejala" value="perubahan_pola_makan" 
+                     data-kesimpulan="Sepertinya Anda mengalami perubahan nafsu makan yang signifikan. Ini bisa menjadi gejala sindrom pramenstruasi (PMS) atau gangguan disforik pramenstruasi (PMDD) bagi wanita, tetapi juga bisa terjadi pada pria dan menandakan masalah psikologis atau fisik yang mendasari, seperti gangguan mood atau gangguan makan." 
+                     data-saran="Makan makanan sehat, jadwalkan waktu makan teratur, dan hindari makanan yang terlalu banyak gula atau lemak.">
+              Perubahan nafsu makan.
+            </label><br>
+            <label>
+              <input type="checkbox" name="gejala" value="ketidakmampuan_konsentrasi" 
+                     data-kesimpulan="Anda mungkin mengalami gangguan kecemasan umum (GAD), yang bisa membuat Anda sulit untuk berkonsentrasi karena kecemasan yang berlebihan dan kronis terkait dengan berbagai situasi." 
+                     data-saran="Buat jadwal, atur prioritas tugas, dan coba teknik fokus seperti time-blocking atau metode Pomodoro.">
+              Ketidakmampuan untuk berkonsentrasi.
+              </label><br>
+              <!-- Daftar gejala lainnya -->
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Kesimpulan:</label>
+            <textarea class="form-control" name="kesimpulan" id="kesimpulan" rows="3" readonly></textarea>
+          </div>
+          <div class="form-group">
+            <label>Saran:</label>
+            <textarea class="form-control" name="saran" id="saran" rows="3" readonly></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Diagnosa</button>
+        </form>
+      </div>
+    </div>
+    <div class="row mt-5">
+      <div class="col-md-6 mx-auto" id="resultArea">
+        <!-- Area untuk menampilkan hasil diagnosa -->
+      </div>
+    </div>
+  </div>
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      function updateDiagnosis() {
+        var kesimpulan = '';
+        var saran = '';
+
+        $('input[name="gejala"]:checked').each(function() {
+          kesimpulan += $(this).data('kesimpulan') + '\n';
+          saran += $(this).data('saran') + '\n';
+        });
+
+        $('#kesimpulan').val(kesimpulan.trim());
+        $('#saran').val(saran.trim());
+      }
+
+      $('input[name="gejala"]').change(function() {
+        updateDiagnosis();
+      });
+
+      $('#diagnosisForm').submit(function(e) {
+        e.preventDefault(); // Mencegah reload halaman
+
+        // Ambil nilai nama pasien, gejala yang dipilih, kesimpulan, dan saran
+        var namaPasien = $('#namaPasien').val();
+        var selectedSymptoms = $('input[name="gejala"]:checked').map(function(){
+          return $(this).val();
+        }).get();
+        var kesimpulan = $('#kesimpulan').val();
+        var saran = $('#saran').val();
+
+        // Kirim data nama pasien, gejala, kesimpulan, dan saran ke server dengan AJAX
+        $.ajax({
+          type: "POST",
+          url: "/diagnose",
+          data: { 
+            namaPasien: namaPasien, 
+            symptoms: selectedSymptoms, 
+            kesimpulan: kesimpulan, 
+            saran: saran 
+          },
+          success: function(data) {
+            // Tampilkan hasil diagnosa
+            $('#resultArea').html(data);
+          },
+          error: function() {
+            alert("Terjadi kesalahan saat mengirim data.");
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
