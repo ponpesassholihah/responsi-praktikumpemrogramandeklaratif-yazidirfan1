@@ -8,10 +8,7 @@ with open('index.html', 'r') as file:
 st.markdown(html_content, unsafe_allow_html=True)
 
 # Menjalankan script Perl dan menangkap outputnya
-try:
-    result = subprocess.run(['perl', 'diagnosis.pl'], capture_output=True, text=True, check=True)
-    st.text(result.stdout)
-except subprocess.CalledProcessError as e:
-    st.error(f"Error executing Perl script: {e}")
-    st.error(f"Standard Output: {e.stdout}")
-    st.error(f"Standard Error: {e.stderr}")
+result = subprocess.run(['perl', 'diagnosis.pl'], capture_output=True, text=True)
+
+# Menampilkan output dari script Perl di Streamlit
+st.text(result.stdout)
